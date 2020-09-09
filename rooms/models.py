@@ -49,6 +49,13 @@ class HouseRule(AbstractItem):
 class Photo(core_models.TimeStamptedModel):
     """ Photo Model Definition """
 
+    caption = models.CharField(max_length=80)
+    file = models.ImageField()
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
+
 
 class Room(core_models.TimeStamptedModel):
 
@@ -70,11 +77,11 @@ class Room(core_models.TimeStamptedModel):
     # host도 유저자너
     # foreignKey는 한 모델을 다른 모델과 연결하는 역할을 해
     # on_deleteㄴ 행동이야. 장고에게 class Room으로 무엇을 할 지 말하는 것, User가 delete됐다면 말야
-    host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
-    amenities = models.ManyToManyField(Amenity, blank=True)
-    facilities = models.ManyToManyField(Facility, blank=True)
-    house_rules = models.ManyToManyField(HouseRule, blank=True)
+    host = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    room_type = models.ForeignKey("RoomType", on_delete=models.SET_NULL, null=True)
+    amenities = models.ManyToManyField("Amenity", blank=True)
+    facilities = models.ManyToManyField("Facility", blank=True)
+    house_rules = models.ManyToManyField("HouseRule", blank=True)
 
     def __str__(self):
         return self.name
