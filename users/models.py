@@ -32,18 +32,12 @@ class User(AbstractUser):
     CURRENCY_KRW = "krw"
 
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
-    # CharField는 1arg를 가지는데 max_length임. ** 중요! 최대 글자수를 말해. null=True는 비어있어도 괜찮다는거야.
+    # CharField는 1arg를 가지는데 max_length임. ** 중요! 최대 글자수를 말해는 비어있어도 괜찮다는거야.
     # form에 변화룰 준거(성별성택)같은걸로는 migration등이 필요하지 않아
-    avatar = models.ImageField(null=True, blank=True)
-    gender = models.CharField(
-        choices=GENDER_CHOICES, max_length=10, null=True, blank=True
-    )
-    bio = models.TextField(default="", blank=True)
-    birthdate = models.DateField(null=True)
-    language = models.CharField(
-        choices=LANGUAGE_CHOICES, max_length=2, null=True, blank=True
-    )
-    currency = models.CharField(
-        choices=CURRENCY_CHOICES, max_length=3, null=True, blank=True
-    )
+    avatar = models.ImageField(blank=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    bio = models.TextField(blank=True)
+    birthdate = models.DateField(blank=True, null=True)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
+    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
     superhost = models.BooleanField(default=False)

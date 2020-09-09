@@ -38,9 +38,13 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+THIRD_PARTY_APPS = ["django_countries"]
+
 PROJECT_APPS = [
     # 내가 만든 유저앱을 설정할 것
+    "core.apps.CoreConfig",
     "users.apps.UsersConfig",
+    "rooms.apps.RoomsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -125,5 +129,5 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# users.모델의 이름
+# users.모델의 이름. 내가 만든 user를 쓰려고 autuh_user_model을 바꿔줌
 AUTH_USER_MODEL = "users.User"
