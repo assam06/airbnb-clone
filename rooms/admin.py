@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 
-# Register your models here.
+
 @admin.register(models.RoomType, models.Facility, models.Amenity, models.HouseRule)
 class ItemAdmin(admin.ModelAdmin):
 
@@ -15,7 +15,33 @@ class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
-    pass
+    list_display = (
+        "name",
+        "country",
+        "city",
+        "price",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+    )
+
+    list_filter = (
+        "instant_book",
+        "country",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+        "city",
+        "country",
+    )
+
+    # 검색하는 방법 정하기
+    search_fields = ("=city", "^host__username")
 
 
 @admin.register(models.Photo)
